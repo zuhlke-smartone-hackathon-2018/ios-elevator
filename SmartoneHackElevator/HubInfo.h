@@ -10,6 +10,6 @@
 #define HubInfo_h
 
 #define HUBNAME @"SmarToneNotifications"
-#define HUBLISTENACCESS @"0tcXJaemth4yv+hO/AMgI9S2H0GVyJoo7lY2DH5k6C4="
+#define HUBLISTENACCESS @"Endpoint=sb://smartone.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=NTyikqJG6I5uILQO3pvce5fOQQmtS6tIjdCl7T1Hm3k="
 
 #endif /* HubInfo_h */
