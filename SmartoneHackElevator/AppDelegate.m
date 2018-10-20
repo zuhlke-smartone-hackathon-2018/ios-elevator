@@ -7,12 +7,17 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) ViewController *rootViewController;
+@property (nonatomic, assign) Boolean recognizeLiftPush;
 
 @end
 
 @implementation AppDelegate
+
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -24,6 +29,9 @@
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    self.rootViewController = (ViewController *)self.window.rootViewController;
+    self.recognizeLiftPush = true;
     return YES;
 }
 
@@ -62,7 +70,7 @@
         if (error != nil) {
             NSLog(@"Error registering for notifications: %@", error);
         } else {
-            [self MessageBox:@"Registration Status" message:@"Registered"];
+            NSLog(@"registering for notifications successfully");
         }
     }];
 }
@@ -76,7 +84,23 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
     NSLog(@"%@", userInfo);
-    [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
+    // "{\"aps\":{ \"elevator\": true, \"aircon\": true }}"
+    // [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
+    
+    NSString *airImageName = @"air";
+    NSString *liftImageName = @"lift";
+    if (self.recognizeLiftPush) {
+        Boolean isElevator = [[userInfo objectForKey:@"aps"] boolForKey:@"elevator"];
+        if (isElevator) {
+            [self.rootViewController updateImage:airImageName];
+        }
+    } else {
+        Boolean isAircon = [[userInfo objectForKey:@"aps"] boolForKey:@"aircon"];
+        if (isAircon) {
+            [self.rootViewController updateImage:liftImageName];
+        }
+    }
+    
 }
 
 @end
