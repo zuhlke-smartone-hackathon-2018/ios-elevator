@@ -30,8 +30,24 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
+    
+    NSMutableDictionary *apsInfo = [[NSMutableDictionary alloc] init];
+    [apsInfo setObject:@true forKey:@"elevator"];
+    [apsInfo setObject:@true forKey:@"aircon"];
+    
+    NSMutableDictionary *dummyInfo = [[NSMutableDictionary alloc] init];
+    [dummyInfo setObject:apsInfo forKey:@"apsInfo"];
+    
+    [dummyInfo setObject:apsInfo forKey:@"aps"];
     self.rootViewController = (ViewController *)self.window.rootViewController;
     self.recognizeLiftPush = true;
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        //Run UI Updates
+        NSDictionary *fakePushData = [self generateDummyPushData];
+        [self updateImage:fakePushData];
+    });
+    
     return YES;
 }
 
@@ -86,21 +102,33 @@
     NSLog(@"%@", userInfo);
     // "{\"aps\":{ \"elevator\": true, \"aircon\": true }}"
     // [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
-    
+    [self updateImage:userInfo];
+}
+
+- (void)updateImage:(NSDictionary *)userInfo {
     NSString *airImageName = @"air";
     NSString *liftImageName = @"lift";
     if (self.recognizeLiftPush) {
-        Boolean isElevator = [[userInfo objectForKey:@"aps"] boolForKey:@"elevator"];
-        if (isElevator) {
-            [self.rootViewController updateImage:airImageName];
-        }
-    } else {
-        Boolean isAircon = [[userInfo objectForKey:@"aps"] boolForKey:@"aircon"];
-        if (isAircon) {
+        NSNumber* isElevator = (NSNumber *)[[userInfo objectForKey:@"aps"] objectForKey:@"elevator"];
+        if ([isElevator integerValue] == 1) {
             [self.rootViewController updateImage:liftImageName];
         }
+    } else {
+        NSNumber* isAircon = (NSNumber *)[[userInfo objectForKey:@"aps"] objectForKey:@"aircon"];
+        if ([isAircon integerValue] == 1) {
+            [self.rootViewController updateImage:airImageName];
+        }
     }
+}
+
+- (NSDictionary *)generateDummyPushData {
+    NSMutableDictionary *apsInfo = [[NSMutableDictionary alloc] init];
+    [apsInfo setObject:@1 forKey:@"elevator"];
+    [apsInfo setObject:@1 forKey:@"aircon"];
     
+    NSMutableDictionary *dummyInfo = [[NSMutableDictionary alloc] init];
+    [dummyInfo setObject:apsInfo forKey:@"aps"];
+    return dummyInfo;
 }
 
 @end
