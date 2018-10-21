@@ -8,11 +8,14 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) ViewController *rootViewController;
 @property (nonatomic, assign) Boolean recognizeLiftPush;
+@property (nonatomic, strong) AVAudioPlayer *audioPlayer;
 
 @end
 
@@ -113,6 +116,7 @@
         NSNumber* isElevator = (NSNumber *)[[userInfo objectForKey:@"aps"] objectForKey:@"elevator"];
         if ([isElevator integerValue] == 1) {
             [self.rootViewController updateImage:liftImageName];
+            [self playBackgroundSound];
         }
     } else {
         NSNumber* isAircon = (NSNumber *)[[userInfo objectForKey:@"aps"] objectForKey:@"aircon"];
@@ -130,6 +134,14 @@
     NSMutableDictionary *dummyInfo = [[NSMutableDictionary alloc] init];
     [dummyInfo setObject:apsInfo forKey:@"aps"];
     return dummyInfo;
+}
+
+- (void)playBackgroundSound {
+    //start a background sound
+    NSString *soundFilePath = [[NSBundle mainBundle] pathForResource:@"elevator" ofType: @"mp3"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:soundFilePath ];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+    [self.audioPlayer play];
 }
 
 @end

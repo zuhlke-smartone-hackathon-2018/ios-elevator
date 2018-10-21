@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7BA70989217C1D9200027F9F /* elevator.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7BA70988217C1D9200027F9F /* elevator.mp3 */; };
 		7BF83F79217B6601008476DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF83F78217B6601008476DC /* AppDelegate.m */; };
 		7BF83F7C217B6601008476DC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF83F7B217B6601008476DC /* ViewController.m */; };
 		7BF83F7F217B6601008476DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BF83F7D217B6601008476DC /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7BA70988217C1D9200027F9F /* elevator.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = elevator.mp3; path = ../../../Downloads/elevator.mp3; sourceTree = "<group>"; };
 		7BF83F74217B6601008476DC /* SmartoneHackElevator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartoneHackElevator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BF83F77217B6601008476DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7BF83F78217B6601008476DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -47,6 +49,7 @@
 		7BF83F6B217B6601008476DC = {
 			isa = PBXGroup;
 			children = (
+				7BA70988217C1D9200027F9F /* elevator.mp3 */,
 				7BF83F8E217B66DC008476DC /* Frameworks */,
 				7BF83F76217B6601008476DC /* SmartoneHackElevator */,
 				7BF83F75217B6601008476DC /* Products */,
@@ -149,6 +152,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA70989217C1D9200027F9F /* elevator.mp3 in Resources */,
 				7BF83F84217B6602008476DC /* LaunchScreen.storyboard in Resources */,
 				7BF83F81217B6602008476DC /* Assets.xcassets in Resources */,
 				7BF83F7F217B6601008476DC /* Main.storyboard in Resources */,
