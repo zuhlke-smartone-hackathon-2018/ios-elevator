@@ -29,24 +29,25 @@
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
+    self.recognizeLiftPush = true;
+    self.rootViewController = (ViewController *)self.window.rootViewController;
     
-    
+    /*
     NSMutableDictionary *apsInfo = [[NSMutableDictionary alloc] init];
     [apsInfo setObject:@true forKey:@"elevator"];
     [apsInfo setObject:@true forKey:@"aircon"];
     
+    
     NSMutableDictionary *dummyInfo = [[NSMutableDictionary alloc] init];
     [dummyInfo setObject:apsInfo forKey:@"apsInfo"];
-    
     [dummyInfo setObject:apsInfo forKey:@"aps"];
     self.rootViewController = (ViewController *)self.window.rootViewController;
-    self.recognizeLiftPush = true;
     
     dispatch_async(dispatch_get_main_queue(), ^(void){
         //Run UI Updates
         NSDictionary *fakePushData = [self generateDummyPushData];
         [self updateImage:fakePushData];
-    });
+    });*/
     
     return YES;
 }
